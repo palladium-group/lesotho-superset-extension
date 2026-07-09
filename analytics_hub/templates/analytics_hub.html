@@ -1,0 +1,585 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analytics Hub</title>
+    <style>
+      :root {
+        --page-bg: #f4f7f9;
+        --panel-bg: #ffffff;
+        --panel-border: #dfe7ec;
+        --text-main: #1f2933;
+        --text-muted: #637381;
+        --text-soft: #8492a6;
+        --accent: #0f6b7a;
+        --accent-dark: #0a5260;
+        --accent-soft: #e6f3f5;
+        --success-bg: #e8f7ef;
+        --success-text: #1f7a4d;
+        --warning-bg: #fff7df;
+        --warning-text: #8a6500;
+        --neutral-bg: #edf1f4;
+        --neutral-text: #637381;
+        --shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--page-bg);
+        color: var(--text-main);
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 28px;
+      }
+
+      .simple-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 8px 0 22px 0;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--panel-border);
+      }
+
+      .brand-block {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--accent), #1aa3a8);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        box-shadow: var(--shadow);
+      }
+
+      .partner-logo-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-width: 120px;
+      }
+
+      .partner-logo {
+        max-height: 42px;
+        max-width: 150px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .eyebrow {
+        margin: 0 0 4px 0;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.15;
+      }
+
+      .header-subtitle {
+        margin: 6px 0 0 0;
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 210px 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 18px;
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .sidebar-title {
+        margin: 4px 8px 12px 8px;
+        color: var(--text-soft);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .side-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 11px 12px;
+        margin-bottom: 6px;
+        border-radius: 12px;
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 650;
+      }
+
+      .side-item:hover {
+        background: #f1f6f8;
+      }
+
+      .side-item.active {
+        background: var(--accent-soft);
+        color: var(--accent-dark);
+      }
+
+      .content {
+        min-width: 0;
+      }
+
+      .cards,
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 18px;
+      }
+
+      .card,
+      .catalogue-header,
+      .product-card,
+      .dashboard-panel {
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .card,
+      .product-card {
+        padding: 20px;
+      }
+
+      .card {
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .system-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: var(--accent-soft);
+        color: var(--accent-dark);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.2;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      .description {
+        color: var(--text-muted);
+        line-height: 1.55;
+        margin: 12px 0 0 0;
+      }
+
+      .badge,
+      .status {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 750;
+        white-space: nowrap;
+      }
+
+      .badge {
+        background: var(--accent-soft);
+        color: var(--accent-dark);
+      }
+
+      .status {
+        background: var(--neutral-bg);
+        color: var(--neutral-text);
+      }
+
+      .status-prototype {
+        background: var(--warning-bg);
+        color: var(--warning-text);
+      }
+
+      .status-coming-soon {
+        background: var(--neutral-bg);
+        color: var(--neutral-text);
+      }
+
+      .status-live {
+        background: var(--success-bg);
+        color: var(--success-text);
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 9px 14px;
+        border-radius: 11px;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 750;
+        font-size: 14px;
+        border: 1px solid transparent;
+      }
+
+      .btn:hover {
+        background: var(--accent-dark);
+      }
+
+      .btn.secondary {
+        background: #ffffff;
+        color: var(--text-main);
+        border-color: var(--panel-border);
+      }
+
+      .btn.secondary:hover {
+        background: #f5f8fa;
+      }
+
+      .btn.disabled {
+        background: #eef2f4;
+        color: #99a3ad;
+        border-color: #eef2f4;
+        cursor: not-allowed;
+      }
+
+      .catalogue-header {
+        padding: 24px;
+        margin-bottom: 18px;
+      }
+
+      .catalogue-header-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      .catalogue-header h2 {
+        margin-top: 8px;
+        font-size: 26px;
+      }
+
+      .catalogue-summary {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .summary-chip {
+        background: #f5f8fa;
+        border: 1px solid var(--panel-border);
+        border-radius: 999px;
+        padding: 8px 12px;
+        color: var(--text-muted);
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .product-card {
+        min-height: 235px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .product-card p {
+        color: var(--text-muted);
+        line-height: 1.55;
+      }
+
+      .dashboard-panel {
+        padding: 22px;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .dashboard-header h2 {
+        margin-top: 8px;
+        font-size: 25px;
+      }
+
+      .dashboard-frame-shell {
+        margin-top: 18px;
+        background: #eef3f6;
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 10px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 780px;
+        border: 0;
+        border-radius: 12px;
+        background: #fff;
+        display: block;
+      }
+
+      .empty-state {
+        background: #f7fafb;
+        border: 1px dashed #cbd6dd;
+        border-radius: 14px;
+        padding: 18px;
+        color: var(--text-muted);
+      }
+
+      @media (max-width: 860px) {
+        .simple-header,
+        .catalogue-header-inner,
+        .dashboard-header {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .partner-logo-wrap {
+          justify-content: flex-start;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <header class="simple-header">
+        <div class="brand-block">
+          <div class="brand-mark">AH</div>
+          <div>
+            <p class="eyebrow">Integrated analytics platform</p>
+            <h1>Analytics Hub</h1>
+            <p class="header-subtitle">
+              Dashboards, reports and indicators across iHRIS, eLMIS and NCMIS.
+            </p>
+          </div>
+        </div>
+
+        <div class="partner-logo-wrap">
+          <img
+            class="partner-logo"
+            src="/analytics-hub-static/dashboard.png"
+            alt="Analytics Hub icon"
+          />
+        </div>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="sidebar-title">Systems</div>
+
+          <a class="side-item {% if not selected_system_key %}active{% endif %}" href="/analytics-hub/">
+            <span>Overview</span>
+            <span>⌂</span>
+          </a>
+
+          {% for key, system in systems.items() %}
+            <a class="side-item {% if selected_system_key == key %}active{% endif %}" href="/analytics-hub/?system={{ key }}">
+              <span>{{ system.name }}</span>
+              <span>›</span>
+            </a>
+          {% endfor %}
+        </aside>
+
+        <main class="content">
+          {% if selected_product %}
+            <section class="dashboard-panel">
+              <div class="dashboard-header">
+                <div>
+                  <div class="meta-row">
+                    <span class="badge">{{ selected_system.name }}</span>
+                    <span class="status status-{{ selected_product.status | lower | replace(' ', '-') }}">
+                      {{ selected_product.status }}
+                    </span>
+                    <span class="status">{{ selected_product.type }}</span>
+                  </div>
+
+                  <h2>{{ selected_product.title }}</h2>
+                  <p class="description">{{ selected_product.description }}</p>
+                </div>
+
+                <div class="actions">
+                  <a class="btn secondary" href="/analytics-hub/?system={{ selected_system_key }}">
+                    Back to {{ selected_system.name }}
+                  </a>
+
+                  {% if selected_product.url %}
+                    <a class="btn secondary" href="{{ selected_product.url }}" target="_blank">
+                      Open full page
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+
+              {% if selected_product.url %}
+                <div class="dashboard-frame-shell">
+                  <iframe src="{{ selected_product.url }}"></iframe>
+                </div>
+              {% else %}
+                <div class="empty-state">
+                  <strong>This product is not connected yet.</strong>
+                  <p>
+                    Once the relevant database connection, dataset and Superset dashboard
+                    are ready, this product will open here.
+                  </p>
+                </div>
+              {% endif %}
+            </section>
+
+          {% elif selected_system %}
+            <section class="catalogue-header">
+              <div class="catalogue-header-inner">
+                <div>
+                  <span class="badge">{{ selected_system.badge }}</span>
+                  <h2>{{ selected_system.name }} Analytics</h2>
+                  <p class="description">{{ selected_system.description }}</p>
+                </div>
+
+                <div class="catalogue-summary">
+                  <span class="summary-chip">{{ selected_system.products | length }} products</span>
+                  <span class="summary-chip">Curated catalogue</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="product-grid">
+              {% for product in selected_system.products %}
+                <article class="product-card">
+                  <div>
+                    <div class="meta-row">
+                      <span class="badge">{{ product.type }}</span>
+                      <span class="status status-{{ product.status | lower | replace(' ', '-') }}">
+                        {{ product.status }}
+                      </span>
+                    </div>
+
+                    <h3>{{ product.title }}</h3>
+                    <p>{{ product.description }}</p>
+                  </div>
+
+                  <div class="actions">
+                    {% if product.url %}
+                      <a class="btn" href="/analytics-hub/?system={{ selected_system_key }}&product={{ product.id }}">
+                        Open product
+                      </a>
+                    {% else %}
+                      <span class="btn disabled">Coming soon</span>
+                    {% endif %}
+                  </div>
+                </article>
+              {% endfor %}
+            </section>
+
+          {% else %}
+            <section class="cards">
+              {% for key, system in systems.items() %}
+                <article class="card">
+                  <div>
+                    <div class="card-top">
+                      <div class="system-icon">{{ system.name[:1] }}</div>
+                      <span class="badge">{{ system.badge }}</span>
+                    </div>
+
+                    <h2>{{ system.name }}</h2>
+                    <p class="description">{{ system.description }}</p>
+                  </div>
+
+                  <div class="actions">
+                    <a class="btn" href="/analytics-hub/?system={{ key }}">
+                      View analytics products
+                    </a>
+                  </div>
+                </article>
+              {% endfor %}
+            </section>
+          {% endif %}
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
