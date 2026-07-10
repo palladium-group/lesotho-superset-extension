@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from flask import render_template, request, send_from_directory
 from flask_babel import lazy_gettext as _
 from flask_login import login_required
@@ -6,12 +8,17 @@ from jinja2 import ChoiceLoader, FileSystemLoader
 from analytics_hub.catalog import ANALYTICS_HUB_SYSTEMS
 
 
+BASE_DIR = Path(__file__).resolve().parent
+TEMPLATES_DIR = BASE_DIR / "templates"
+STATIC_DIR = BASE_DIR / "static"
+
+
 def register_analytics_hub(app):
     from superset.extensions import appbuilder
 
     app.jinja_loader = ChoiceLoader(
         [
-            FileSystemLoader("/app/docker/pythonpath_dev/analytics_hub/templates"),
+            FileSystemLoader(str(TEMPLATES_DIR)),
             app.jinja_loader,
         ]
     )
@@ -33,10 +40,10 @@ def register_analytics_hub(app):
     @login_required
     def analytics_hub_static(filename):
         return send_from_directory(
-            "/app/docker/pythonpath_dev/analytics_hub/static",
+            str(STATIC_DIR),
             filename,
         )
-    
+
     @app.route("/analytics-hub/")
     @login_required
     def analytics_hub():
