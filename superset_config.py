@@ -24,6 +24,7 @@ import logging
 import os
 import sys
 
+
 from celery.schedules import crontab
 from flask_caching.backends.filesystemcache import FileSystemCache
 
@@ -152,6 +153,10 @@ except ImportError:
 
 
 from analytics_hub import register_analytics_hub
+from analytics_hub.security import AnalyticsHubSecurityManager
+
+
+CUSTOM_SECURITY_MANAGER = AnalyticsHubSecurityManager
 
 
 def FLASK_APP_MUTATOR(app):
