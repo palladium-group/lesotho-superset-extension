@@ -1,0 +1,337 @@
+:root {
+  --page-bg: #f4f7f9;
+  --panel-bg: #ffffff;
+  --panel-border: #dfe7ec;
+  --text-main: #17212b;
+  --text-muted: #637381;
+  --accent: #0f6b7a;
+  --accent-dark: #0a5260;
+  --accent-soft: #e6f3f5;
+  --danger-bg: #fff1f0;
+  --danger-text: #a61b1b;
+  --warning-bg: #fff7df;
+  --warning-text: #7a5b00;
+  --shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text-main);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(420px, 0.95fr) minmax(480px, 1.05fr);
+}
+
+.identity-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 64px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.16), transparent 30%),
+    linear-gradient(145deg, #0a5260, #0f6b7a 55%, #178696);
+  color: #ffffff;
+}
+
+.identity-panel::before,
+.identity-panel::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 50%;
+}
+
+.identity-panel::before {
+  width: 420px;
+  height: 420px;
+  right: -210px;
+  top: -120px;
+}
+
+.identity-panel::after {
+  width: 300px;
+  height: 300px;
+  left: -170px;
+  bottom: -120px;
+}
+
+.identity-content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+}
+
+.ministry-logo {
+  width: 150px;
+  max-height: 190px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 28px;
+  padding: 10px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.17);
+}
+
+.eyebrow,
+.card-eyebrow {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.identity-panel h1 {
+  max-width: 520px;
+  margin: 0;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.identity-description {
+  max-width: 520px;
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.programme-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.programme-list span {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background:
+    linear-gradient(rgba(244, 247, 249, 0.86), rgba(244, 247, 249, 0.86)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(15, 107, 122, 0.04) 0,
+      rgba(15, 107, 122, 0.04) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+}
+
+.login-card {
+  width: min(100%, 460px);
+  padding: 42px;
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  background: var(--panel-bg);
+  box-shadow: var(--shadow);
+}
+
+.mobile-brand {
+  display: none;
+}
+
+.card-eyebrow {
+  color: var(--accent);
+}
+
+.login-card h2 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.025em;
+}
+
+.card-description {
+  margin: 12px 0 28px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.messages {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.message {
+  padding: 11px 13px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.message-warning {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.message-danger,
+.message-error {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+.login-form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.form-control {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #cbd7de;
+  border-radius: 11px;
+  background: #ffffff;
+  color: var(--text-main);
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.form-control::placeholder {
+  color: #9aa7b2;
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(15, 107, 122, 0.12);
+}
+
+.field-errors {
+  display: grid;
+  gap: 3px;
+  color: var(--danger-text);
+  font-size: 12px;
+}
+
+.sign-in-button {
+  min-height: 50px;
+  margin-top: 2px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--accent);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background 0.16s ease,
+    transform 0.16s ease;
+}
+
+.sign-in-button:hover {
+  background: var(--accent-dark);
+}
+
+.sign-in-button:active {
+  transform: translateY(1px);
+}
+
+.support-note,
+.powered-by {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.support-note {
+  margin: 24px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.powered-by {
+  margin: 16px 0 0;
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .identity-panel {
+    display: none;
+  }
+
+  .form-panel {
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  .login-card {
+    padding: 30px 24px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    color: var(--accent-dark);
+    font-weight: 800;
+  }
+
+  .mobile-logo {
+    width: 58px;
+    height: 68px;
+    padding: 4px;
+    object-fit: contain;
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    background: #ffffff;
+  }
+
+  .login-card h2 {
+    font-size: 30px;
+  }
+}
