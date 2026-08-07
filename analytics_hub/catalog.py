@@ -16,7 +16,7 @@ ANALYTICS_HUB_SYSTEMS = {
                     "Overview of health workforce distribution, staffing levels, "
                     "cadres, and facility-level HRH reporting."
                 ),
-                "url": "/superset/dashboard/12/?standalone=1",
+                "url": "/superset/dashboard/8/?standalone=1",
             },
             {
                 "id": "facility-staffing",

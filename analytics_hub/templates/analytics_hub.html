@@ -81,10 +81,54 @@
       }
 
       .partner-logo {
-        max-height: 85px;
-        max-width: 260px;
+        max-height: 70px;
+        max-width: 200px;
         object-fit: contain;
         display: block;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .header-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 9px 14px;
+        border: 1px solid var(--panel-border);
+        border-radius: 11px;
+        background: #ffffff;
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 750;
+        white-space: nowrap;
+      }
+
+      .header-btn:hover {
+        background: #f5f8fa;
+      }
+
+      .header-btn.logout {
+        color: #b42318;
+        border-color: #efc7c2;
+      }
+
+      .header-btn.logout:hover {
+        background: #fff4f2;
       }
 
       .eyebrow {
@@ -109,11 +153,18 @@
         line-height: 1.45;
       }
 
+      .sidebar-toggle-input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
       .layout {
         display: grid;
         grid-template-columns: 210px 1fr;
         gap: 20px;
         align-items: start;
+        transition: grid-template-columns 0.2s ease;
       }
 
       .sidebar {
@@ -124,21 +175,58 @@
         border-radius: 18px;
         padding: 14px;
         box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: padding 0.2s ease;
+      }
+
+      .sidebar-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 10px;
       }
 
       .sidebar-title {
-        margin: 4px 8px 12px 8px;
+        margin: 0 0 0 8px;
         color: var(--text-soft);
         font-size: 12px;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .sidebar-toggle {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        border: 1px solid var(--panel-border);
+        border-radius: 10px;
+        background: #ffffff;
+        color: var(--text-main);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 800;
+        user-select: none;
+      }
+
+      .sidebar-toggle:hover {
+        background: #f5f8fa;
+      }
+
+      .toggle-expand {
+        display: none;
       }
 
       .side-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 10px;
+        min-height: 42px;
         padding: 11px 12px;
         margin-bottom: 6px;
         border-radius: 12px;
@@ -146,6 +234,7 @@
         text-decoration: none;
         font-size: 14px;
         font-weight: 650;
+        white-space: nowrap;
       }
 
       .side-item:hover {
@@ -155,6 +244,44 @@
       .side-item.active {
         background: var(--accent-soft);
         color: var(--accent-dark);
+      }
+
+      .side-short {
+        display: none;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+      }
+
+      .sidebar-toggle-input:checked + .layout {
+        grid-template-columns: 72px 1fr;
+      }
+
+      .sidebar-toggle-input:checked + .layout .sidebar {
+        padding: 10px;
+      }
+
+      .sidebar-toggle-input:checked + .layout .sidebar-head {
+        justify-content: center;
+      }
+
+      .sidebar-toggle-input:checked + .layout .sidebar-title,
+      .sidebar-toggle-input:checked + .layout .side-full,
+      .sidebar-toggle-input:checked + .layout .side-arrow,
+      .sidebar-toggle-input:checked + .layout .toggle-collapse {
+        display: none;
+      }
+
+      .sidebar-toggle-input:checked + .layout .toggle-expand,
+      .sidebar-toggle-input:checked + .layout .side-short {
+        display: block;
+      }
+
+      .sidebar-toggle-input:checked + .layout .side-item {
+        justify-content: center;
+        padding: 10px 6px;
       }
 
       .content {
@@ -193,20 +320,22 @@
       .card-top {
         display: flex;
         align-items: flex-start;
-        justify-content: space-between;
-        gap: 14px;
+        justify-content: flex-start;
         margin-bottom: 14px;
       }
 
       .system-icon {
-        width: 42px;
+        min-width: 48px;
         height: 42px;
+        padding: 0 10px;
         border-radius: 14px;
         background: var(--accent-soft);
         color: var(--accent-dark);
-        display: grid;
+        display: inline-grid;
         place-items: center;
+        font-size: 13px;
         font-weight: 800;
+        letter-spacing: 0.02em;
       }
 
       h2,
@@ -411,16 +540,49 @@
           align-items: stretch;
         }
 
+        .header-right {
+          width: 100%;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
         .partner-logo-wrap {
           justify-content: flex-start;
         }
 
-        .layout {
+        .header-actions {
+          justify-content: flex-start;
+        }
+
+        .layout,
+        .sidebar-toggle-input:checked + .layout {
           grid-template-columns: 1fr;
         }
 
         .sidebar {
           position: static;
+        }
+
+        .sidebar-toggle-input:checked + .layout .sidebar {
+          padding: 14px;
+        }
+
+        .sidebar-toggle-input:checked + .layout .sidebar-title,
+        .sidebar-toggle-input:checked + .layout .side-full,
+        .sidebar-toggle-input:checked + .layout .side-arrow,
+        .sidebar-toggle-input:checked + .layout .toggle-collapse {
+          display: initial;
+        }
+
+        .sidebar-toggle-input:checked + .layout .toggle-expand,
+        .sidebar-toggle-input:checked + .layout .side-short {
+          display: none;
+        }
+
+        .sidebar-toggle-input:checked + .layout .side-item {
+          justify-content: space-between;
+          padding: 11px 12px;
         }
       }
     </style>
@@ -435,33 +597,91 @@
             <p class="eyebrow">Integrated analytics platform</p>
             <h1>Analytics Hub</h1>
             <p class="header-subtitle">
-              Dashboards, reports and indicators across key health and programme analytics areas.
+              Dashboards, reports and indicators across key health programme areas.
             </p>
           </div>
         </div>
 
-        <div class="partner-logo-wrap">
-          <img
-            class="partner-logo"
-            src="/analytics-hub-static/healthlogo.jpg"
-            alt="Analytics Hub icon"
-          />
+        <div class="header-right">
+          <div class="partner-logo-wrap">
+            <img
+              class="partner-logo"
+              src="/analytics-hub-static/healthlogo.jpg"
+              alt="Ministry of Health logo"
+            />
+          </div>
+
+          <div class="header-actions">
+            {% if is_admin %}
+              <a class="header-btn" href="/superset/welcome/">
+                Return to Superset
+              </a>
+            {% endif %}
+
+            <a class="header-btn logout" href="/logout/">
+              Log out
+            </a>
+          </div>
         </div>
       </header>
 
+      <input
+        type="checkbox"
+        id="sidebarToggle"
+        class="sidebar-toggle-input"
+      />
+
       <div class="layout">
         <aside class="sidebar">
-          <div class="sidebar-title">Analytics Areas</div>
+          <div class="sidebar-head">
+            <div class="sidebar-title">Programme Areas</div>
 
-          <a class="side-item {% if not selected_system_key %}active{% endif %}" href="/analytics-hub/">
-            <span>Overview</span>
-            <span>⌂</span>
+            <label
+              for="sidebarToggle"
+              class="sidebar-toggle"
+              title="Collapse or expand programme areas"
+              aria-label="Collapse or expand programme areas"
+            >
+              <span class="toggle-collapse">‹</span>
+              <span class="toggle-expand">›</span>
+            </label>
+          </div>
+
+          <a
+            class="side-item {% if not selected_system_key %}active{% endif %}"
+            href="/analytics-hub/"
+            title="Overview"
+          >
+            <span class="side-full">Overview</span>
+            <span class="side-short">⌂</span>
+            <span class="side-arrow">⌂</span>
           </a>
 
           {% for key, system in systems.items() %}
-            <a class="side-item {% if selected_system_key == key %}active{% endif %}" href="/analytics-hub/?system={{ key }}">
-              <span>{{ system.name }}</span>
-              <span>›</span>
+            <a
+              class="side-item {% if selected_system_key == key %}active{% endif %}"
+              href="/analytics-hub/?system={{ key }}"
+              title="{{ system.name }}"
+            >
+              <span class="side-full">{{ system.name }}</span>
+              <span class="side-short">
+                {% if system.name == "Health Workforce" %}
+                  HW
+                {% elif system.name == "Supply Chain" %}
+                  SC
+                {% elif system.name == "Case Management" %}
+                  CM
+                {% elif system.name == "Quality Improvement" %}
+                  QI
+                {% elif system.name == "Laboratory" %}
+                  LB
+                {% elif system.name == "Surveillance" %}
+                  SV
+                {% else %}
+                  {{ system.name[:2] | upper }}
+                {% endif %}
+              </span>
+              <span class="side-arrow">›</span>
             </a>
           {% endfor %}
         </aside>
@@ -515,7 +735,7 @@
             <section class="catalogue-header">
               <div class="catalogue-header-inner">
                 <div>
-                  {#<span class="badge">{{ selected_system.badge }}</span>#}
+                  <span class="badge">{{ selected_system.badge }}</span>
                   <h2>{{ selected_system.name }} Analytics</h2>
                   <p class="description">{{ selected_system.description }}</p>
                 </div>
@@ -561,8 +781,23 @@
                 <article class="card">
                   <div>
                     <div class="card-top">
-                      <div class="system-icon">{{ system.name[:1] }}</div>
-                      {#<span class="badge">{{ system.badge }}</span>#}
+                      <div class="system-icon">
+                        {% if system.name == "Health Workforce" %}
+                          HW
+                        {% elif system.name == "Supply Chain" %}
+                          SC
+                        {% elif system.name == "Case Management" %}
+                          CM
+                        {% elif system.name == "Quality Improvement" %}
+                          QI
+                        {% elif system.name == "Laboratory" %}
+                          LB
+                        {% elif system.name == "Surveillance" %}
+                          SV
+                        {% else %}
+                          {{ system.name[:2] | upper }}
+                        {% endif %}
+                      </div>
                     </div>
 
                     <h2>{{ system.name }}</h2>
@@ -581,5 +816,6 @@
         </main>
       </div>
     </div>
+    <script src="/analytics-hub-static/sidebar-state.js"></script>
   </body>
 </html>
