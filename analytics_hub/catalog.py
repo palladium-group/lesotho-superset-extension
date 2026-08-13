@@ -16,7 +16,7 @@ ANALYTICS_HUB_SYSTEMS = {
                     "Overview of health workforce distribution, staffing levels, "
                     "cadres, and facility-level HRH reporting."
                 ),
-                "url": "/superset/dashboard/8/?standalone=1",
+                "url": "/superset/dashboard/2/?standalone=1",
             },
             {
                 "id": "facility-staffing",
@@ -27,7 +27,7 @@ ANALYTICS_HUB_SYSTEMS = {
                     "Facility staffing gaps, filled posts, vacant posts, and "
                     "staffing distribution."
                 ),
-                "url": None,
+                 "url": "/superset/dashboard/2/?standalone=3",
             },
             {
                 "id": "cadre-distribution",
@@ -49,7 +49,7 @@ ANALYTICS_HUB_SYSTEMS = {
                     "Checks for missing staff records, duplicate personnel, "
                     "incomplete facility assignment, and inconsistent cadre values."
                 ),
-                "url": None,
+                 "url": "/superset/dashboard/4/?standalone=1",
             },
         ],
     },
