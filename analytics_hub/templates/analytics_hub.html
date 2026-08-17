@@ -94,43 +94,6 @@
         gap: 16px;
       }
 
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      .header-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 38px;
-        padding: 9px 14px;
-        border: 1px solid var(--panel-border);
-        border-radius: 11px;
-        background: #ffffff;
-        color: var(--text-main);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 750;
-        white-space: nowrap;
-      }
-
-      .header-btn:hover {
-        background: #f5f8fa;
-      }
-
-      .header-btn.logout {
-        color: #b42318;
-        border-color: #efc7c2;
-      }
-
-      .header-btn.logout:hover {
-        background: #fff4f2;
-      }
-
       .eyebrow {
         margin: 0 0 4px 0;
         color: var(--accent);
@@ -170,13 +133,21 @@
       .sidebar {
         position: sticky;
         top: 18px;
+        min-height: calc(100vh - 190px);
         background: var(--panel-bg);
         border: 1px solid var(--panel-border);
         border-radius: 18px;
         padding: 14px;
         box-shadow: var(--shadow);
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
         transition: padding 0.2s ease;
+      }
+
+      .sidebar-main {
+        display: flex;
+        flex-direction: column;
       }
 
       .sidebar-head {
@@ -255,6 +226,29 @@
         letter-spacing: 0.02em;
       }
 
+      .sidebar-bottom {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid var(--panel-border);
+      }
+
+      .side-action {
+        color: var(--text-muted);
+      }
+
+      .side-action:hover {
+        color: var(--text-main);
+      }
+
+      .side-action.logout {
+        color: #b42318;
+      }
+
+      .side-action.logout:hover {
+        background: #fff4f2;
+        color: #b42318;
+      }
+
       .sidebar-toggle-input:checked + .layout {
         grid-template-columns: 72px 1fr;
       }
@@ -282,6 +276,10 @@
       .sidebar-toggle-input:checked + .layout .side-item {
         justify-content: center;
         padding: 10px 6px;
+      }
+
+      .sidebar-toggle-input:checked + .layout .sidebar-bottom {
+        padding-top: 10px;
       }
 
       .content {
@@ -551,10 +549,6 @@
           justify-content: flex-start;
         }
 
-        .header-actions {
-          justify-content: flex-start;
-        }
-
         .layout,
         .sidebar-toggle-input:checked + .layout {
           grid-template-columns: 1fr;
@@ -562,6 +556,7 @@
 
         .sidebar {
           position: static;
+          min-height: auto;
         }
 
         .sidebar-toggle-input:checked + .layout .sidebar {
@@ -610,18 +605,6 @@
               alt="Ministry of Health logo"
             />
           </div>
-
-          <div class="header-actions">
-            {% if is_admin %}
-              <a class="header-btn" href="/superset/welcome/">
-                Return to Superset
-              </a>
-            {% endif %}
-
-            <a class="header-btn logout" href="/logout/">
-              Log out
-            </a>
-          </div>
         </div>
       </header>
 
@@ -633,57 +616,83 @@
 
       <div class="layout">
         <aside class="sidebar">
-          <div class="sidebar-head">
-            <div class="sidebar-title">Programme Areas</div>
+          <div class="sidebar-main">
+            <div class="sidebar-head">
+              <div class="sidebar-title">Programme Areas</div>
 
-            <label
-              for="sidebarToggle"
-              class="sidebar-toggle"
-              title="Collapse or expand programme areas"
-              aria-label="Collapse or expand programme areas"
+              <label
+                for="sidebarToggle"
+                class="sidebar-toggle"
+                title="Collapse or expand programme areas"
+                aria-label="Collapse or expand programme areas"
+              >
+                <span class="toggle-collapse">‹</span>
+                <span class="toggle-expand">›</span>
+              </label>
+            </div>
+
+            <a
+              class="side-item {% if not selected_system_key %}active{% endif %}"
+              href="/analytics-hub/"
+              title="Overview"
             >
-              <span class="toggle-collapse">‹</span>
-              <span class="toggle-expand">›</span>
-            </label>
+              <span class="side-full">Overview</span>
+              <span class="side-short">⌂</span>
+              <span class="side-arrow">⌂</span>
+            </a>
+
+            {% for key, system in systems.items() %}
+              <a
+                class="side-item {% if selected_system_key == key %}active{% endif %}"
+                href="/analytics-hub/?system={{ key }}"
+                title="{{ system.name }}"
+              >
+                <span class="side-full">{{ system.name }}</span>
+                <span class="side-short">
+                  {% if system.name == "Health Workforce" %}
+                    HW
+                  {% elif system.name == "Supply Chain" %}
+                    SC
+                  {% elif system.name == "Case Management" %}
+                    CM
+                  {% elif system.name == "Quality Improvement" %}
+                    QI
+                  {% elif system.name == "Laboratory" %}
+                    LB
+                  {% elif system.name == "Surveillance" %}
+                    SV
+                  {% else %}
+                    {{ system.name[:2] | upper }}
+                  {% endif %}
+                </span>
+                <span class="side-arrow">›</span>
+              </a>
+            {% endfor %}
           </div>
 
-          <a
-            class="side-item {% if not selected_system_key %}active{% endif %}"
-            href="/analytics-hub/"
-            title="Overview"
-          >
-            <span class="side-full">Overview</span>
-            <span class="side-short">⌂</span>
-            <span class="side-arrow">⌂</span>
-          </a>
+          <div class="sidebar-bottom">
+            {% if is_admin %}
+              <a
+                class="side-item side-action"
+                href="/superset/welcome/"
+                title="Return to Superset"
+              >
+                <span class="side-full">Return to Superset</span>
+                <span class="side-short">S</span>
+                <span class="side-arrow">↗</span>
+              </a>
+            {% endif %}
 
-          {% for key, system in systems.items() %}
             <a
-              class="side-item {% if selected_system_key == key %}active{% endif %}"
-              href="/analytics-hub/?system={{ key }}"
-              title="{{ system.name }}"
+              class="side-item side-action logout"
+              href="/logout/"
+              title="Log out"
             >
-              <span class="side-full">{{ system.name }}</span>
-              <span class="side-short">
-                {% if system.name == "Health Workforce" %}
-                  HW
-                {% elif system.name == "Supply Chain" %}
-                  SC
-                {% elif system.name == "Case Management" %}
-                  CM
-                {% elif system.name == "Quality Improvement" %}
-                  QI
-                {% elif system.name == "Laboratory" %}
-                  LB
-                {% elif system.name == "Surveillance" %}
-                  SV
-                {% else %}
-                  {{ system.name[:2] | upper }}
-                {% endif %}
-              </span>
-              <span class="side-arrow">›</span>
+              <span class="side-full">Log out</span>
+              <span class="side-short">⎋</span>
+              <span class="side-arrow">↗</span>
             </a>
-          {% endfor %}
+          </div>
         </aside>
 
         <main class="content">
@@ -735,7 +744,7 @@
             <section class="catalogue-header">
               <div class="catalogue-header-inner">
                 <div>
-                  <span class="badge">{{ selected_system.badge }}</span>
+                  {# <span class="badge">{{ selected_system.badge }}</span> #}
                   <h2>{{ selected_system.name }} Analytics</h2>
                   <p class="description">{{ selected_system.description }}</p>
                 </div>
