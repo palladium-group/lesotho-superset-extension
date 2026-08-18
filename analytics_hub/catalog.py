@@ -11,13 +11,25 @@ ANALYTICS_HUB_SYSTEMS = {
                 "id": "workforce-overview",
                 "title": "Workforce Overview Dashboard",
                 "type": "Dashboard",
-                "status": "Prototype",
+                "status": "Live",
                 "description": (
                     "Overview of health workforce distribution, staffing levels, "
                     "cadres, and facility-level HRH reporting."
                 ),
                 "url": "/superset/dashboard/2/?standalone=1",
             },
+            {
+                "id": "cadre-distribution",
+                "title": "Cadre Distribution Report",
+                "type": "Report",
+                "status": "Live",   
+                "description": (
+                    "Workforce distribution by cadre, district, facility, and "
+                    "employment category."
+                ),
+                "url": "/superset/dashboard/3/?standalone=3"
+                
+            },                   
             {
                 "id": "facility-staffing",
                 "title": "Facility Staffing Dashboard",
@@ -27,24 +39,13 @@ ANALYTICS_HUB_SYSTEMS = {
                     "Facility staffing gaps, filled posts, vacant posts, and "
                     "staffing distribution."
                 ),
-                 "url": "/superset/dashboard/2/?standalone=3",
+                 "url": None,
             },
             {
-                "id": "cadre-distribution",
-                "title": "Cadre Distribution Report",
-                "type": "Report",
-                "status": "Coming soon",
-                "description": (
-                    "Workforce distribution by cadre, district, facility, and "
-                    "employment category."
-                ),
-                "url": None,
-            },
-            {
-                "id": "hrh-data-quality",
-                "title": "HRH Data Quality Checks",
+                "id": "data-quality",
+                "title": "Data Quality Checks",
                 "type": "Data quality",
-                "status": "Coming soon",
+                "status": "Live",
                 "description": (
                     "Checks for missing staff records, duplicate personnel, "
                     "incomplete facility assignment, and inconsistent cadre values."
