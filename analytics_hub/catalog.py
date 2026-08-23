@@ -67,12 +67,12 @@ ANALYTICS_HUB_SYSTEMS = {
                 "id": "stock-status",
                 "title": "Stock Status Dashboard",
                 "type": "Dashboard",
-                "status": "Prototype",
+                "status": "Live",
                 "description": (
                     "Stock on hand, months of stock, stock availability, and "
                     "facility-level commodity status."
                 ),
-                "url": "/superset/dashboard/9/?standalone=1",
+                "url": "/superset/dashboard/5/?standalone=1",
             },
             {
                 "id": "stockout-trends",
