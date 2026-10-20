@@ -1,5 +1,6 @@
 ANALYTICS_HUB_SYSTEMS = {
 "ihris": {
+        "required_role": "Analytics - Health Workforce",
         "name": "Health Workforce",
         "badge": "HRH",
         "description": (
@@ -56,6 +57,7 @@ ANALYTICS_HUB_SYSTEMS = {
     },
 
     "elmis": {
+        "required_role": "Analytics - Supply Chain",
         "name": "Supply Chain",
         "badge": "eLMIS",
         "description": (
@@ -109,61 +111,8 @@ ANALYTICS_HUB_SYSTEMS = {
         ],
     },
 
-    "ncmis": {
-        "name": "Case Management",
-        "badge": "NCMIS",
-        "description": (
-            "Case management analytics covering services, referrals, GBV/OVC "
-            "indicators, client support workflows, and custom reports."
-        ),
-        "products": [
-            {
-                "id": "case-management-overview",
-                "title": "Case Management Overview",
-                "type": "Dashboard",
-                "status": "Coming soon",
-                "description": (
-                    "Case volumes, services provided, case status, and programme-level "
-                    "summary indicators."
-                ),
-                "url": None,
-            },
-            {
-                "id": "referrals-dashboard",
-                "title": "Referrals Dashboard",
-                "type": "Dashboard",
-                "status": "Coming soon",
-                "description": (
-                    "Referrals, completion status, service points, and referral outcomes."
-                ),
-                "url": None,
-            },
-            {
-                "id": "gbv-ovc-indicators",
-                "title": "GBV/OVC Service Indicators",
-                "type": "Indicator set",
-                "status": "Coming soon",
-                "description": (
-                    "Indicator catalogue for GBV, OVC, child protection, and case "
-                    "management service indicators."
-                ),
-                "url": None,
-            },
-            {
-                "id": "custom-reports",
-                "title": "Custom Reports",
-                "type": "Report",
-                "status": "Coming soon",
-                "description": (
-                    "Custom reporting area for MGYSD operational and programme-specific "
-                    "reporting needs."
-                ),
-                "url": None,
-            },
-        ],
-    },
-
     "quality-improvement": {
+        "required_role": "Analytics - Quality Improvement",
         "name": "Quality Improvement",
         "badge": "CQI",
         "description": (
@@ -208,6 +157,7 @@ ANALYTICS_HUB_SYSTEMS = {
     },
 
     "laboratory": {
+        "required_role": "Analytics - Laboratory",
         "name": "Laboratory",
         "badge": "Lab",
         "description": (
@@ -252,6 +202,7 @@ ANALYTICS_HUB_SYSTEMS = {
     },
 
     "surveillance": {
+        "required_role": "Analytics - Surveillance",
         "name": "Surveillance",
         "badge": "Public Health",
         "description": (
@@ -296,6 +247,7 @@ ANALYTICS_HUB_SYSTEMS = {
     },
 
     "outbreak-response": {
+        "required_role": "Analytics - Outbreak Response",
         "name": "Outbreak Response",
         "badge": "Outbreak",
         "description": (

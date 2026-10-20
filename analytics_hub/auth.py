@@ -45,3 +45,20 @@ def is_hub_viewer() -> bool:
 def can_access_hub() -> bool:
     allowed = {role.casefold() for role in ALLOWED_HUB_ROLES}
     return bool(current_role_names() & allowed)
+
+def authorized_systems(catalogue: dict) -> dict:
+    """Return programmes accessible to the current user."""
+
+    if not can_access_hub():
+        return {}
+
+    if is_admin():
+        return catalogue
+
+    roles = current_role_names()
+
+    return {
+        key: system
+        for key, system in catalogue.items()
+        if system.get("required_role", "").casefold() in roles
+    }
