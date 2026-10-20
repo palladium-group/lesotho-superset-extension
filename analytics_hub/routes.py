@@ -6,8 +6,8 @@ from flask import abort, render_template, request, send_from_directory
 from flask_babel import lazy_gettext as _
 from flask_login import current_user, login_required
 from jinja2 import ChoiceLoader, FileSystemLoader
+from analytics_hub.auth import authorized_systems, can_access_hub
 
-from analytics_hub.auth import can_access_hub
 from analytics_hub.catalog import ANALYTICS_HUB_SYSTEMS
 
 
@@ -66,7 +66,13 @@ def register_analytics_hub(app) -> None:
         selected_system_key = request.args.get("system")
         selected_product_id = request.args.get("product")
 
-        systems = ANALYTICS_HUB_SYSTEMS
+        # Filter programmes based on the logged-in user's assigned roles
+        systems = authorized_systems(ANALYTICS_HUB_SYSTEMS)
+
+        # Prevent access to programmes not assigned to the user
+        if selected_system_key and selected_system_key not in systems:
+            abort(403)
+
         selected_system = systems.get(selected_system_key)
         selected_product = None
 
