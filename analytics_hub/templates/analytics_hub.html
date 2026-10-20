@@ -592,21 +592,86 @@
           padding: 11px 12px;
         }
       }
+
+      /* Refreshed Analytics Hub visual design */
+      :root { --page-bg:#f5f8fa; --text-main:#17283b; --text-muted:#61738a; --accent:#116b7a; --accent-dark:#075364; --panel-border:#e4ebef; --shadow:0 8px 26px rgba(28,51,71,.055); }
+      .page { padding:0; }
+      .simple-header { height:74px; min-height:74px; padding:0 28px; margin:0; background:#fff; border-bottom:1px solid var(--panel-border); }
+      .brand-mark { width:42px; height:42px; border-radius:11px; font-size:15px; }
+      .brand-block { gap:14px; }
+      h1 { font-size:25px; font-weight:750; letter-spacing:-.035em; }
+      .partner-logo { max-height:46px; max-width:210px; }
+      .layout { grid-template-columns:238px minmax(0,1fr); gap:0; min-height:calc(100vh - 74px); }
+      .sidebar { position:relative; top:auto; min-height:calc(100vh - 74px); border:0; border-right:1px solid var(--panel-border); border-radius:0; box-shadow:none; padding:18px 14px; }
+      .sidebar-head { justify-content:flex-end; min-height:26px; margin-bottom:10px; }
+      .sidebar-title { margin-right:auto; font-size:10px; }
+      .sidebar-toggle { width:29px; height:29px; flex:0 0 29px; border-radius:8px; font-size:17px; }
+      .side-item { justify-content:space-between; min-height:48px; gap:8px; padding:11px 12px; margin-bottom:7px; font-size:13px; font-weight:650; border-radius:11px; }
+      .side-main { display:flex; align-items:center; gap:13px; min-width:0; }
+      .nav-icon, .card-icon, .action-icon { display:block; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+      .nav-icon { width:19px; height:19px; }
+      .side-arrow { color:#7f91a1; }
+      .sidebar-bottom { padding-top:13px; }
+      .sidebar-toggle-input:checked + .layout { grid-template-columns:70px minmax(0,1fr); }
+      .sidebar-toggle-input:checked + .layout .sidebar { padding:15px 9px; }
+      .sidebar-toggle-input:checked + .layout .sidebar-title, .sidebar-toggle-input:checked + .layout .side-full, .sidebar-toggle-input:checked + .layout .side-arrow { display:none; }
+      .sidebar-toggle-input:checked + .layout .side-item { justify-content:center; padding:12px 7px; }
+      .sidebar-toggle-input:checked + .layout .side-main { justify-content:center; }
+      .content { padding:32px 26px; }
+      .cards { grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+      .card { min-width:0; min-height:326px; padding:22px; border-radius:16px; transition:box-shadow .2s ease,transform .2s ease; }
+      .card:hover { transform:translateY(-2px); box-shadow:0 14px 32px rgba(28,51,71,.10); }
+      .card-top { margin-bottom:22px; }
+      .system-icon { width:54px; height:54px; padding:0; border-radius:15px; }
+      .card-icon { width:29px; height:29px; }
+      .card-workforce .system-icon { background:#e6f5ff; color:#1381b8; }
+      .card-supply .system-icon { background:#e4f6ed; color:#12956d; }
+      .card-outbreak .system-icon { background:#fff0e8; color:#d65d27; }
+      .card-quality .system-icon { background:#eeebff; color:#6754d9; }
+      .card-lab .system-icon { background:#fceaf0; color:#dc527b; }
+      .card-surveillance .system-icon { background:#e8f3ff; color:#287fc9; }
+      .card h2 { font-size:19px; line-height:1.3; letter-spacing:-.015em; }
+      .card .description { font-size:13.5px; line-height:1.65; }
+      .card .actions { margin-top:22px; }
+      .card .btn { width:100%; justify-content:space-between; gap:10px; }
+      .action-icon { width:17px; height:17px; }
+      .btn { border-radius:9px; min-height:41px; font-size:13px; }
+      .catalogue-header, .product-card, .dashboard-panel { border-radius:16px; }
+      @media(max-width:1300px) { .cards { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+      @media(max-width:1080px) { .cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+      @media(max-width:860px) {
+        .simple-header { flex-direction:row; align-items:center; gap:10px; }
+        .header-right { width:auto; }
+        .partner-logo { max-width:130px; }
+        .layout, .sidebar-toggle-input:checked + .layout { grid-template-columns:1fr; }
+        .sidebar, .sidebar-toggle-input:checked + .layout .sidebar { min-height:auto; border-right:0; border-bottom:1px solid var(--panel-border); padding:12px 14px; }
+        .sidebar-toggle-input:checked + .layout .side-full { display:initial; }
+        .sidebar-toggle-input:checked + .layout .side-main { justify-content:flex-start; }
+        .content { padding:20px 14px; }
+      }
+      @media(max-width:620px) { .cards { grid-template-columns:1fr; } .simple-header { padding:0 16px; } h1 { font-size:21px; } }
     </style>
   </head>
 
   <body>
+    <!-- Inline icon library: no CDN or JavaScript dependency. -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+      <symbol id="ico-overview" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/></symbol>
+      <symbol id="ico-workforce" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3ZM17 5a3 3 0 0 1 0 6M19 14a5 5 0 0 1 2 4v2h-4"/></symbol>
+      <symbol id="ico-supply" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5ZM3 7v10l9 5 9-5V7M12 12v10"/></symbol>
+      <symbol id="ico-outbreak" viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5M12 18h.01"/></symbol>
+      <symbol id="ico-quality" viewBox="0 0 24 24"><path d="M4 20V12h4v8M10 20V7h4v13M16 20V3h4v17"/></symbol>
+      <symbol id="ico-lab" viewBox="0 0 24 24"><path d="M9 3h6M10 3v8l-6 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2l-6-9V3M8 16h8"/></symbol>
+      <symbol id="ico-surveillance" viewBox="0 0 24 24"><path d="m12 2 8 4v6c0 5-3.4 8-8 10-4.6-2-8-5-8-10V6l8-4Z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="ico-external" viewBox="0 0 24 24"><path d="M13 5h6v6M19 5l-9 9M19 14v5H5V5h5"/></symbol>
+      <symbol id="ico-logout" viewBox="0 0 24 24"><path d="M10 4H5v16h5M14 8l4 4-4 4M8 12h10"/></symbol>
+      <symbol id="ico-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    </svg>
     <div class="page">
       <header class="simple-header">
         <div class="brand-block">
           <div class="brand-mark">AH</div>
-          <div>
-            <p class="eyebrow">Integrated analytics platform</p>
-            <h1>Analytics Hub</h1>
-            <p class="header-subtitle">
-              Dashboards, reports and indicators across key health programme areas.
-            </p>
-          </div>
+          <h1>Analytics Hub</h1>
         </div>
 
         <div class="header-right">
@@ -631,7 +696,7 @@
         <aside class="sidebar">
           <div class="sidebar-main">
             <div class="sidebar-head">
-              <div class="sidebar-title">Programme Areas</div>
+              <div class="sidebar-title">Navigation</div>
 
               <label
                 for="sidebarToggle"
@@ -649,34 +714,19 @@
               href="/analytics-hub/"
               title="Overview"
             >
-              <span class="side-full">Overview</span>
-              <span class="side-short">⌂</span>
-              <span class="side-arrow">⌂</span>
+              <span class="side-main"><svg class="nav-icon"><use href="#ico-overview"/></svg><span class="side-full">Overview</span></span>
             </a>
 
-            {% for key, system in systems.items() %}
+            {% for key, system in systems.items() if system.name != "Case Management" %}
               <a
                 class="side-item {% if selected_system_key == key %}active{% endif %}"
                 href="/analytics-hub/?system={{ key }}"
                 title="{{ system.name }}"
               >
-                <span class="side-full">{{ system.name }}</span>
-                <span class="side-short">
-                  {% if system.name == "Health Workforce" %}
-                    HW
-                  {% elif system.name == "Supply Chain" %}
-                    SC
-                  {% elif system.name == "Case Management" %}
-                    CM
-                  {% elif system.name == "Quality Improvement" %}
-                    QI
-                  {% elif system.name == "Laboratory" %}
-                    LB
-                  {% elif system.name == "Surveillance" %}
-                    SV
-                  {% else %}
-                    {{ system.name[:2] | upper }}
-                  {% endif %}
+                <span class="side-main">
+                  {% set icon_key = {'Health Workforce':'workforce','Supply Chain':'supply','Outbreak Response':'outbreak','Quality Improvement':'quality','Laboratory':'lab','Surveillance':'surveillance'}.get(system.name, 'overview') %}
+                  <svg class="nav-icon"><use href="#ico-{{ icon_key }}"/></svg>
+                  <span class="side-full">{{ system.name }}</span>
                 </span>
                 <span class="side-arrow">›</span>
               </a>
@@ -690,9 +740,7 @@
                 href="/superset/welcome/"
                 title="Return to Superset"
               >
-                <span class="side-full">Return to Superset</span>
-                <span class="side-short">S</span>
-                <span class="side-arrow">↗</span>
+                <span class="side-main"><svg class="nav-icon"><use href="#ico-external"/></svg><span class="side-full">Return to Superset</span></span>
               </a>
             {% endif %}
 
@@ -701,9 +749,7 @@
               href="/logout/"
               title="Log out"
             >
-              <span class="side-full">Log out</span>
-              <span class="side-short">⎋</span>
-              <span class="side-arrow">↗</span>
+              <span class="side-main"><svg class="nav-icon"><use href="#ico-logout"/></svg><span class="side-full">Log out</span></span>
             </a>
           </div>
         </aside>
@@ -799,27 +845,12 @@
 
           {% else %}
             <section class="cards">
-              {% for key, system in systems.items() %}
-                <article class="card">
+              {% for key, system in systems.items() if system.name != "Case Management" %}
+                {% set icon_key = {'Health Workforce':'workforce','Supply Chain':'supply','Outbreak Response':'outbreak','Quality Improvement':'quality','Laboratory':'lab','Surveillance':'surveillance'}.get(system.name, 'overview') %}
+                <article class="card card-{{ icon_key }}">
                   <div>
                     <div class="card-top">
-                      <div class="system-icon">
-                        {% if system.name == "Health Workforce" %}
-                          HW
-                        {% elif system.name == "Supply Chain" %}
-                          SC
-                        {% elif system.name == "Case Management" %}
-                          CM
-                        {% elif system.name == "Quality Improvement" %}
-                          QI
-                        {% elif system.name == "Laboratory" %}
-                          LB
-                        {% elif system.name == "Surveillance" %}
-                          SV
-                        {% else %}
-                          {{ system.name[:2] | upper }}
-                        {% endif %}
-                      </div>
+                      <div class="system-icon"><svg class="card-icon"><use href="#ico-{{ icon_key }}"/></svg></div>
                     </div>
 
                     <h2>{{ system.name }}</h2>
@@ -828,7 +859,7 @@
 
                   <div class="actions">
                     <a class="btn" href="/analytics-hub/?system={{ key }}">
-                      View analytics products
+                      View analytics products <svg class="action-icon"><use href="#ico-arrow"/></svg>
                     </a>
                   </div>
                 </article>

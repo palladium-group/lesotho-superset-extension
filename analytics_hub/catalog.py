@@ -294,4 +294,29 @@ ANALYTICS_HUB_SYSTEMS = {
             },
         ],
     },
+
+    "outbreak-response": {
+        "name": "Outbreak Response",
+        "badge": "Outbreak",
+        "description": (
+            "Outbreak response analytics covering case investigation, geographic "
+            "spread, laboratory confirmation, vaccination response, and "
+            "response performance."
+        ),
+        "products": [
+            {
+                "id": "measles-outbreak-response",
+                "title": "Measles Outbreak Response Dashboard",
+                "type": "Dashboard",
+                "status": "Coming soon",
+                "description": (
+                    "Monitor measles cases, geographic and temporal patterns, "
+                    "laboratory confirmation, vaccination response, and "
+                    "outbreak response activities."
+                ),
+                "url": None,
+            },
+        ],
+    },
+
 }
