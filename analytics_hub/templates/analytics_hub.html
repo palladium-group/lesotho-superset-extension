@@ -869,6 +869,10 @@
         </main>
       </div>
     </div>
-    <script src="/analytics-hub-static/sidebar-state.js"></script>
+    <!-- Allow sidebar persistence script under Superset's CSP -->
+    <script
+      nonce="{{ csp_nonce() }}"
+      src="/analytics-hub-static/sidebar-state.js">
+    </script>
   </body>
 </html>
